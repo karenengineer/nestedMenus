@@ -1,0 +1,16 @@
+<div class="basic-container">
+  <span *ngFor="let item of navItems">
+    <span *ngIf="item.children && item.children.length > 0">
+      <button class="btn btn-primary" (click)="toggleSubMenu(item)">
+        {{item.displayName}}
+        <i class="fa fa-caret-down" [ngClass]="{ 'fa-rotate-180': item.expanded }"></i>
+      </button>
+      <app-menu-item [items]="item.children" [parentId]="'menu-' + item.displayName" *ngIf="item.expanded"></app-menu-item>
+    </span>
+    <span *ngIf="!item.children || item.children.length === 0">
+      <button class="btn btn-primary">
+        {{item.displayName}}
+      </button>
+    </span>
+  </span>
+</div>

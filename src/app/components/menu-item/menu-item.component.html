@@ -1,0 +1,18 @@
+<div [id]="parentId" class="menu">
+  <ul class="list-group">
+    <ng-container *ngFor="let child of items">
+      <li *ngIf="child.children && child.children.length > 0" class="list-group-item" [class]="child.expanded ? 'menu-item-expanded' : 'menu-item-closed'">
+        <div (click)="toggleSubMenu(child)" >
+          <i class="fa fa-{{child.iconName}} item-icon"></i>
+          <span class="item-icon" >{{child.displayName}}</span>
+          <i class="fa fa-caret-down" [ngClass]="{ 'fa-rotate-180': child.expanded }"></i>
+        </div>
+        <app-menu-item [items]="child.children" [parentId]="'menu-' + child.displayName" *ngIf="child.expanded"></app-menu-item>
+      </li>
+      <li *ngIf="!child.children || child.children.length === 0" class="list-group-item">
+        <i class="fa fa-{{child.iconName}} item-icon"></i>
+        <span class="item-icon">{{child.displayName}}</span>
+      </li>
+    </ng-container>
+  </ul>
+</div>
